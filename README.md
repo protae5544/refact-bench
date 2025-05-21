@@ -39,7 +39,10 @@ This will install all dependencies listed in `setup.py`, including the `refact` 
 
 ### 2. Prepare the Static LSP Binary
 
-Clone the Refact repository and build the necessary components:
+Clone the Refact repository and build the necessary components. To reproduce SWE evaluation results, you need to use following branches of `refact`:
+- https://github.com/smallcloudai/refact/tree/swe-boosted-prompt for SWE-lite
+- https://github.com/smallcloudai/refact/tree/swe-boosted-prompt-verified for SWE-verified
+
 
 ```sh
 git clone https://github.com/smallcloudai/refact.git
