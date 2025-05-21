@@ -30,7 +30,9 @@ def get_lsp_runner(
     ]
     args.append("--experimental")
     args.append("--ast")
-    args.append("--vecdb")
+    args.append("--wait-ast")
+    # args.append("--vecdb")
+    # args.append("--wait-vecdb")
     args.append("--workspace-folder")
     path_to_project = str(task_workdir / task_rec.repo_underscores() / task_rec.working_dir)
     args.append(path_to_project)

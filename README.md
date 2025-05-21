@@ -103,7 +103,7 @@ This configuration allows Refact-Bench to use Docker for creating isolated envir
 To run a benchmark task, use the `fakeide run` command. For example, to run the `swe-verified` tasks using the `claude-3-7-sonnet` model:
 
 ```sh
-fakeide run --api-key <API-KEY> --model claude-3-7-sonnet --docker tasks/swe/verified --experiment my-experiment
+fakeide run --api-key <REFACT-API-KEY> --model claude-3-7-sonnet --docker tasks/swe/verified --experiment my-experiment
 ```
 
 Replace `<API-KEY>` with Refact key and `my-experiment` with a name to group your benchmark runs.
@@ -121,7 +121,7 @@ The results of the benchmark will be stored in `./results/`
 If you want to test models on your self-hosted server, specify the `--address-url` parameter with your local address:
 
 ```sh
-fakeide run --address-url http://localhost:8080 --api-key <API-KEY> --model claude-3-7-sonnet --docker tasks/swe/verified
+fakeide run --address-url http://localhost:8080 --api-key <API-KEY> --model refact/claude-3-7-sonnet --docker tasks/swe/verified
 ```
 
 Note: Your server should be started on `0.0.0.0`. A common use case with node is:

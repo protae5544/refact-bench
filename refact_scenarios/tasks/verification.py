@@ -75,7 +75,7 @@ async def run_verification(
             chat_id=chat_id,
             chat_remote=run_in_docker,
             boost_thinking=boost_thinking,
-            tags=set(map(str, task_dir.parts))
+            domain=task_rec.domain
         )
         verify_log.close()
         messages_json = [msg.model_dump(exclude_none=True) for msg in messages]

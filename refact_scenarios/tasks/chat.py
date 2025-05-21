@@ -82,7 +82,7 @@ async def chat_loop(
     temperature: float = 0.4,
     max_steps: int = 50,
     boost_thinking: bool = False,
-    tags: Set[str],
+    domain: str,
 ) -> List[chat_client.Message]:
     tools = await chat_client.tools_fetch_and_filter(base_url=lsp_runner.base_url(), tools_turn_on=None)
     N = 1
@@ -120,7 +120,7 @@ async def chat_loop(
         if not messages[-1].tool_calls:
             global_logger.info("CHAT OVER NO TOOL CALLS ANYMORE")
             break
-        if "verified" in tags:
+        if domain == 'swe-verified':
             messages = swe_verified_guard(messages)
     else:
         global_logger.warning("CHAT OVER OUT OF TURNS")
@@ -161,7 +161,8 @@ async def run_chat(
         temperature=0.0,
         max_steps=chat_max_depth,
         chat_remote=run_in_docker,
-        boost_thinking=boost_thinking
+        boost_thinking=boost_thinking,
+        domain=task_rec.domain
     )
     ended_ts = time.time()
 
