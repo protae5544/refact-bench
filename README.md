@@ -57,6 +57,7 @@ This step compiles the Language Server Protocol (LSP) implementation needed for 
 ```sh
 cd ./refact/refact-agent/engine/
 cargo build --release
+mkdir -p ./python_binding_and_cmdline/refact/bin/
 cp ./target/release/refact-lsp ./python_binding_and_cmdline/refact/bin/refact-lsp
 ```
 

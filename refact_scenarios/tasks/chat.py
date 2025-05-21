@@ -3,13 +3,72 @@ import json
 import logging
 
 from pathlib import Path
-from typing import IO, List
+from typing import IO, List, Optional, Set
 
 from refact import chat_client
 from refact.lsp_runner import LSPServerRunner
 from refact_scenarios.fakeide_logging import global_logger
 from refact_scenarios.fakeide_structs import Task
 from refact_scenarios.fakeide_utils import query_lsp_version, save_log_json
+
+
+def swe_verified_guard(messages) -> List[chat_client.Message]:
+    mustvebeen_called_once = [
+        ["tree", "cat", "search_symbol_definition", "search_symbol_usages", "search_pattern", "search_semantic", "shell"],
+        ["debug_script"],
+        ["strategic_planning"],
+        ["critique"],
+    ]
+    all_tools_calls = [
+        [t.function.name for t in m.tool_calls]
+        for m in messages
+        if m.tool_calls is not None
+    ]
+    all_tool_calls_flatten = [t for toll_calls in all_tools_calls for t in toll_calls]
+    for stage_i, stage_tools in enumerate(mustvebeen_called_once):
+        if not any(t in stage_tools for t in all_tool_calls_flatten):
+            stage = stage_i - 1
+            break
+    else:
+        return messages
+
+    last_message_tool_calls = all_tools_calls[-1]
+    shell_cnt = sum(1 if t == "shell" else 0 for t in last_message_tool_calls)
+    if shell_cnt > 0 and shell_cnt % 5 == 0:
+        messages.append(chat_client.Message(
+            role="cd_instruction",
+            content="💿 Use `debug_script()` instead of `shell()`. Dig deeper than previous attempts, use breakpoints inside the project.",
+        ))
+    elif ("debug_script" in last_message_tool_calls
+          and sum(1 if t == "debug_script" else 0 for t in all_tool_calls_flatten) > 3):
+        messages.append(chat_client.Message(
+            role="cd_instruction",
+            content="💿 You cannot call debug_script more than 3 times.",
+        ))
+    elif (("update_textdoc" in last_message_tool_calls or "create_textdoc" in last_message_tool_calls)
+          and sum(1 if t == "strategic_planning" else 0 for t in all_tool_calls_flatten) == 0
+          and sum(1 if t == "debug_script" else 0 for t in all_tool_calls_flatten) > 0):
+        messages.append(chat_client.Message(
+            role="cd_instruction",
+            content="💿 Call strategic_planning() before changing the project.",
+        ))
+    elif (set([t for tools in all_tools_calls[-20:] for t in tools]) == {"shell", "update_textdoc", "create_textdoc"} \
+            or set([t for tools in all_tools_calls[-20:] for t in tools]) == {"shell", "update_textdoc"})\
+            and not any([m.content.startswith("💿 If you have difficulties") for m in messages[-20:] if m.content is not None]):
+        messages.append(chat_client.Message(
+            role="cd_instruction",
+            content="💿 If you have difficulties with the correct solution, consider using `debug_script()` or `strategic_planning()`",
+        ))
+    else:
+        for stage_i, stage_tools in enumerate(mustvebeen_called_once[stage + 1:]):
+            if any(t in stage_tools for t in last_message_tool_calls):
+                messages.append(chat_client.Message(
+                    role="cd_instruction",
+                    content=f"💿 You cannot call {all_tools_calls[-1]} since you are on the previous step. Please, follow the strategy",
+                ))
+                break
+    return messages
+
 
 async def chat_loop(
     lsp_runner: LSPServerRunner,
@@ -23,6 +82,7 @@ async def chat_loop(
     temperature: float = 0.4,
     max_steps: int = 50,
     boost_thinking: bool = False,
+    tags: Set[str],
 ) -> List[chat_client.Message]:
     tools = await chat_client.tools_fetch_and_filter(base_url=lsp_runner.base_url(), tools_turn_on=None)
     N = 1
@@ -60,6 +120,8 @@ async def chat_loop(
         if not messages[-1].tool_calls:
             global_logger.info("CHAT OVER NO TOOL CALLS ANYMORE")
             break
+        if "verified" in tags:
+            messages = swe_verified_guard(messages)
     else:
         global_logger.warning("CHAT OVER OUT OF TURNS")
     return messages

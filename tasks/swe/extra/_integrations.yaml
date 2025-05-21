@@ -15,13 +15,22 @@ isolation:
   docker_entrypoint: "/bin/bash"
 
 shell:
-  timeout: "90"
+  timeout: "600"
   available:
     on_your_laptop: true
     when_isolated: true
   confirmation:
     ask_user: [""]
     deny: ["docker*"]
+
+pdb:
+  python_path: ''
+  available:
+    on_your_laptop: true
+    when_isolated: true
+  confirmation:
+    ask_user: [ ]
+    deny: [ ]
 
 globally_allowed_integrations:
   - docker
