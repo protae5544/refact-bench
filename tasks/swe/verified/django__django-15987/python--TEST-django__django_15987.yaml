@@ -1,0 +1,21 @@
+domain: swe-verified
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-15987
+revision: 7e6b537f5b92be152779fc492bb908d27fe7c52a
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-15987
+    - princeton-nlp/SWE-bench_Verified
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Fixture dirs duplicates undetected if dir is Path\
+        \ instance\nDescription\n\t\nWhen FIXTURE_DIRS contains Path instances, the duplicate check in loaddata does not detect\
+        \ duplicates.\n"

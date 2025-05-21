@@ -1,0 +1,34 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pydicom__pydicom-1694
+revision: f8cf45b6c121e5a4bf4a43f71aba3bc64af3db9c
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pydicom__pydicom-1694
+    - princeton-nlp/SWE-bench_Lite
+    - dev
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Dataset.to_json_dict can still generate exceptions\
+        \ when suppress_invalid_tags=True\n**Describe the bug**\r\nI'm using `Dataset.to_json_dict(suppress_invalid_tags=True)`\
+        \ and can live with losing invalid tags.  Unfortunately, I can still trigger an exception with something like  `2.0`\
+        \ in an `IS` field.\r\n\r\n**Expected behavior**\r\nto_json_dict shouldn't throw an error about an invalid tag when\
+        \ `suppress_invalid_tags` is enabled.\r\n\r\nMy thought was simply to move the `data_element = self[key]` into the\
+        \ try/catch block that's right after it.\r\n\r\n**Steps To Reproduce**\r\n\r\nTraceback:\r\n```\r\n  File \"dicom.py\"\
+        , line 143, in create_dict\r\n    json_ds = ds.to_json_dict(suppress_invalid_tags=True)\r\n  File \"/usr/lib/python3/dist-packages/pydicom/dataset.py\"\
+        , line 2495, in to_json_dict\r\n    data_element = self[key]\r\n  File \"/usr/lib/python3/dist-packages/pydicom/dataset.py\"\
+        , line 939, in __getitem__\r\n    self[tag] = DataElement_from_raw(elem, character_set, self)\r\n  File \"/usr/lib/python3/dist-packages/pydicom/dataelem.py\"\
+        , line 859, in DataElement_from_raw\r\n    value = convert_value(vr, raw, encoding)\r\n  File \"/usr/lib/python3/dist-packages/pydicom/values.py\"\
+        , line 771, in convert_value\r\n    return converter(byte_string, is_little_endian, num_format)\r\n  File \"/usr/lib/python3/dist-packages/pydicom/values.py\"\
+        , line 348, in convert_IS_string\r\n    return MultiString(num_string, valtype=pydicom.valuerep.IS)\r\n  File \"/usr/lib/python3/dist-packages/pydicom/valuerep.py\"\
+        , line 1213, in MultiString\r\n    return valtype(splitup[0])\r\n  File \"/usr/lib/python3/dist-packages/pydicom/valuerep.py\"\
+        , line 1131, in __new__\r\n    raise TypeError(\"Could not convert value to integer without loss\")\r\nTypeError:\
+        \ Could not convert value to integer without loss\r\n```\r\n\r\n**Your environment**\r\npython 3.7, pydicom 2.3\r\n\
+        \r\n\n"

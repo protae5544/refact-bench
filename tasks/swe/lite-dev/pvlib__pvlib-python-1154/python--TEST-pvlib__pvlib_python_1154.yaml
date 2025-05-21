@@ -1,0 +1,25 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pvlib__pvlib-python-1154
+revision: 0b8f24c265d76320067a5ee908a57d475cd1bb24
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pvlib__pvlib-python-1154
+    - princeton-nlp/SWE-bench_Lite
+    - dev
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            pvlib.irradiance.reindl() model generates NaNs when\
+        \ GHI = 0\n**Describe the bug**\r\nThe reindl function should give zero sky diffuse when GHI is zero. Instead it generates\
+        \ NaN or Inf values due to \"term3\" having a quotient that divides by GHI.  \r\n\r\n**Expected behavior**\r\nThe\
+        \ reindl function should result in zero sky diffuse when GHI is zero.\r\n\r\n\npvlib.irradiance.reindl() model generates\
+        \ NaNs when GHI = 0\n**Describe the bug**\r\nThe reindl function should give zero sky diffuse when GHI is zero. Instead\
+        \ it generates NaN or Inf values due to \"term3\" having a quotient that divides by GHI.  \r\n\r\n**Expected behavior**\r\
+        \nThe reindl function should result in zero sky diffuse when GHI is zero.\r\n\r\n\n"

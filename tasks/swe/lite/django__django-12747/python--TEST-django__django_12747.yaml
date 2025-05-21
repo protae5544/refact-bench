@@ -1,0 +1,27 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-12747
+revision: c86201b6ed4f8256b0a0520c08aa674f623d4127
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-12747
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            QuerySet.Delete - inconsistent result when zero\
+        \ objects deleted\nDescription\n\t\nThe result format of the QuerySet.Delete method is a tuple: (X, Y) \nX - is the\
+        \ total amount of deleted objects (including foreign key deleted objects)\nY - is a dictionary specifying counters\
+        \ of deleted objects for each specific model (the key is the _meta.label of the model and the value is counter of\
+        \ deleted objects of this model).\nExample: <class 'tuple'>: (2, {'my_app.FileAccess': 1, 'my_app.File': 1})\nWhen\
+        \ there are zero objects to delete in total - the result is inconsistent:\nFor models with foreign keys - the result\
+        \ will be: <class 'tuple'>: (0, {})\nFor \"simple\" models without foreign key - the result will be: <class 'tuple'>:\
+        \ (0, {'my_app.BlockLibrary': 0})\nI would expect there will be no difference between the two cases: Either both will\
+        \ have the empty dictionary OR both will have dictionary with model-label keys and zero value.\n"

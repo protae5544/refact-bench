@@ -1,0 +1,21 @@
+domain: swe-verified
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-16886
+revision: c50643a49811e9fe2f4851adff4313ad46f7325e
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-16886
+    - princeton-nlp/SWE-bench_Verified
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Morse encoding for \"1\" is not correct\nThe current\
+        \ Morse mapping in simpy.crypto.crypto contains an incorrect mapping of \r\n`\"----\": \"1\"`   \r\n\r\nThe correct\
+        \ mapping is `\".----\": \"1\"`.\r\n\r\n\n"

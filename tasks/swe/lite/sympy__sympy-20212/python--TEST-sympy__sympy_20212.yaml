@@ -1,0 +1,23 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-20212
+revision: a106f4782a9dbe7f8fd16030f15401d977e03ae9
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-20212
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            0**-oo produces 0, the documentation says it should\
+        \ produce zoo\nUsing SymPy 1.5.1, evaluate `0**-oo` produces `0`.\r\n\r\nThe documentation for the Pow class states\
+        \ that it should return `ComplexInfinity`, aka `zoo`\r\n\r\n| expr | value | reason |\r\n| :-- | :-- | :--|\r\n| `0**-oo`\
+        \ | `zoo` | This is not strictly true, as 0**oo may be oscillating between positive and negative values or rotating\
+        \ in the complex plane. It is convenient, however, when the base is positive.|\r\n\n"

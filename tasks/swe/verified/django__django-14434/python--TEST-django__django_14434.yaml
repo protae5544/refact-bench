@@ -1,0 +1,21 @@
+domain: swe-verified
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-14434
+revision: 5e04e84d67da8163f365e9f5fcd169e2630e2873
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-14434
+    - princeton-nlp/SWE-bench_Verified
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Statement created by _create_unique_sql makes references_column\
+        \ always false\nDescription\n\t\nThis is due to an instance of Table is passed as an argument to Columns when a string\
+        \ is expected.\n"

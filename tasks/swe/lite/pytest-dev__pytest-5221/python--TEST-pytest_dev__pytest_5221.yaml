@@ -1,0 +1,21 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pytest-dev__pytest-5221
+revision: 4a2fdce62b73944030cff9b3e52862868ca9584d
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pytest-dev__pytest-5221
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Display fixture scope with `pytest --fixtures`\n\
+        It would be useful to show fixture scopes with `pytest --fixtures`; currently the only way to learn the scope of a\
+        \ fixture is look at the docs (when that is documented) or at the source code.\n"

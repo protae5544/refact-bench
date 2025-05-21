@@ -1,0 +1,24 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-14730
+revision: 4fe3774c729f3fd5105b3001fe69a70bdca95ac3
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-14730
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Prevent developers from defining a related_name\
+        \ on symmetrical ManyToManyFields\nDescription\n\t\nIn ManyToManyField, if the symmetrical argument is passed, or\
+        \ if it's a self-referential ManyToMany relationship, the related field on the target model is not created. However,\
+        \ if a developer passes in the related_name not understanding this fact, they may be confused until they find the\
+        \ information about symmetrical relationship. Thus, it is proposed to raise an error when the user defines a ManyToManyField\
+        \ in this condition.\n"

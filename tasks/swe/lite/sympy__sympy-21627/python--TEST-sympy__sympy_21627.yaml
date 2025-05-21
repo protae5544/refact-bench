@@ -1,0 +1,22 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-21627
+revision: 126f80578140e752ad5135aac77b8ff887eede3e
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-21627
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Bug: maximum recusion depth error when checking\
+        \ is_zero of cosh expression\nThe following code causes a `RecursionError: maximum recursion depth exceeded while\
+        \ calling a Python object` error when checked if it is zero:\r\n```\r\nexpr =sympify(\"cosh(acos(-i + acosh(-g + i)))\"\
+        )\r\nexpr.is_zero\r\n```\n"

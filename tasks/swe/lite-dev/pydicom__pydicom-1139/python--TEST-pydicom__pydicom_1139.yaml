@@ -1,0 +1,24 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pydicom__pydicom-1139
+revision: b9fb05c177b685bf683f7f57b2d57374eb7d882d
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pydicom__pydicom-1139
+    - princeton-nlp/SWE-bench_Lite
+    - dev
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Make PersonName3 iterable\n```python\r\nfrom pydicom\
+        \ import Dataset\r\n\r\nds = Dataset()\r\nds.PatientName = 'SomeName'\r\n\r\n'S' in ds.PatientName\r\n```\r\n```\r\
+        \nTraceback (most recent call last):\r\n  File \"<stdin>\", line 1, in <module>\r\nTypeError: argument of type 'PersonName3'\
+        \ is not iterable\r\n```\r\n\r\nI'm not really sure if this is intentional or if PN elements should support `str`\
+        \ methods. And yes I know I can `str(ds.PatientName)` but it's a bit silly, especially when I keep having to write\
+        \ exceptions to my element iterators just for PN elements.\n"

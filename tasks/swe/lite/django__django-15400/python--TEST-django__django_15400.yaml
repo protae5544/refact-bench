@@ -1,0 +1,26 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-15400
+revision: 4c76ffc2d6c77c850b4bef8d9acc197d11c47937
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-15400
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            SimpleLazyObject doesn't implement __radd__\nDescription\n\
+        \t\nTechnically, there's a whole bunch of magic methods it doesn't implement, compared to a complete proxy implementation,\
+        \ like that of wrapt.ObjectProxy, but __radd__ being missing is the one that's biting me at the moment.\nAs far as\
+        \ I can tell, the implementation can't just be\n__radd__ = new_method_proxy(operator.radd)\nbecause that doesn't exist,\
+        \ which is rubbish.\n__radd__ = new_method_proxy(operator.attrgetter(\"__radd__\"))\nalso won't work because types\
+        \ may not have that attr, and attrgetter doesn't supress the exception (correctly)\nThe minimal implementation I've\
+        \ found that works for me is:\n\tdef __radd__(self, other):\n\t\tif self._wrapped is empty:\n\t\t\tself._setup()\n\
+        \t\treturn other + self._wrapped\n"

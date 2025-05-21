@@ -1,0 +1,26 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pylint-dev__astroid-1268
+revision: ce5cbce5ba11cdc2f8139ade66feea1e181a7944
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pylint-dev__astroid-1268
+    - princeton-nlp/SWE-bench_Lite
+    - dev
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            'AsStringVisitor' object has no attribute 'visit_unknown'\n\
+        ```python\r\n>>> import astroid\r\n>>> astroid.nodes.Unknown().as_string()\r\nTraceback (most recent call last):\r\
+        \n  File \"<stdin>\", line 1, in <module>\r\n  File \"/Users/tusharsadhwani/code/marvin-python/venv/lib/python3.9/site-packages/astroid/nodes/node_ng.py\"\
+        , line 609, in as_string\r\n    return AsStringVisitor()(self)\r\n  File \"/Users/tusharsadhwani/code/marvin-python/venv/lib/python3.9/site-packages/astroid/nodes/as_string.py\"\
+        , line 56, in __call__\r\n    return node.accept(self).replace(DOC_NEWLINE, \"\\n\")\r\n  File \"/Users/tusharsadhwani/code/marvin-python/venv/lib/python3.9/site-packages/astroid/nodes/node_ng.py\"\
+        , line 220, in accept\r\n    func = getattr(visitor, \"visit_\" + self.__class__.__name__.lower())\r\nAttributeError:\
+        \ 'AsStringVisitor' object has no attribute 'visit_unknown'\r\n>>> \r\n```\r\n### `python -c \"from astroid import\
+        \ __pkginfo__; print(__pkginfo__.version)\"` output\r\n\r\n2.8.6-dev0\n"

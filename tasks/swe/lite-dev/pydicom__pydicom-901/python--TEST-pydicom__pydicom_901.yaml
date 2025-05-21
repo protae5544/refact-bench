@@ -1,0 +1,26 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pydicom__pydicom-901
+revision: 3746878d8edf1cbda6fbcf35eec69f9ba79301ca
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pydicom__pydicom-901
+    - princeton-nlp/SWE-bench_Lite
+    - dev
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            pydicom should not define handler, formatter and\
+        \ log level.\nThe `config` module (imported when pydicom is imported) defines a handler and set the log level for\
+        \ the pydicom logger. This should not be the case IMO. It should be the responsibility of the client code of pydicom\
+        \ to configure the logging module to its convenience. Otherwise one end up having multiple logs record as soon as\
+        \ pydicom is imported:\r\n\r\nExample:\r\n```\r\nCould not import pillow\r\n2018-03-25 15:27:29,744 :: DEBUG :: pydicom\
+        \ \r\n  Could not import pillow\r\nCould not import jpeg_ls\r\n2018-03-25 15:27:29,745 :: DEBUG :: pydicom \r\n  Could\
+        \ not import jpeg_ls\r\nCould not import gdcm\r\n2018-03-25 15:27:29,745 :: DEBUG :: pydicom \r\n  Could not import\
+        \ gdcm\r\n``` \r\nOr am I missing something?\n"

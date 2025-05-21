@@ -1,0 +1,37 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pallets__flask-5063
+revision: 182ce3dd15dfa3537391c3efaf9c3ff407d134d4
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pallets__flask-5063
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Flask routes to return domain/sub-domains information\n\
+        Currently when checking **flask routes** it provides all routes but **it is no way to see which routes are assigned\
+        \ to which subdomain**.\r\n\r\n**Default server name:**\r\nSERVER_NAME: 'test.local'\r\n\r\n**Domains (sub-domains):**\r\
+        \ntest.test.local\r\nadmin.test.local\r\ntest.local\r\n\r\n**Adding blueprints:**\r\napp.register_blueprint(admin_blueprint,url_prefix='',subdomain='admin')\r\
+        \napp.register_blueprint(test_subdomain_blueprint,url_prefix='',subdomain='test')\r\n\r\n\r\n```\r\n$ flask routes\r\
+        \n * Tip: There are .env or .flaskenv files present. Do \"pip install python-dotenv\" to use them.\r\nEndpoint   \
+        \                                              Methods    Rule\r\n-------------------------------------------------------\
+        \  ---------  ------------------------------------------------\r\nadmin_blueprint.home                           \
+        \           GET        /home\r\ntest_subdomain_blueprint.home                             GET        /home\r\nstatic\
+        \                                                    GET        /static/<path:filename>\r\n...\r\n```\r\n\r\n\r\n\
+        **Feature request**\r\nIt will be good to see something like below (that will make more clear which route for which\
+        \ subdomain, because now need to go and check configuration).\r\n**If it is not possible to fix routes**, can you\
+        \ add or tell which method(s) should be used to get below information from flask? \r\n\r\n```\r\n$ flask routes\r\n\
+        \ * Tip: There are .env or .flaskenv files present. Do \"pip install python-dotenv\" to use them.\r\nDomain      \
+        \          Endpoint                                             Methods    Rule\r\n-----------------   ----------------------------------------------------\
+        \  ----------  ------------------------------------------------\r\nadmin.test.local     admin_blueprint.home     \
+        \                             GET        /home\r\ntest.test.local      test_subdomain_blueprint.home             \
+        \            GET        /home\r\ntest.local           static                                                GET  \
+        \      /static/<path:filename>\r\n...\r\n```\r\n\n"

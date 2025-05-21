@@ -1,0 +1,37 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pvlib__pvlib-python-1854
+revision: 27a3a07ebc84b11014d3753e4923902adf9a38c0
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pvlib__pvlib-python-1854
+    - princeton-nlp/SWE-bench_Lite
+    - dev
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            PVSystem with single Array generates an error\n\
+        **Is your feature request related to a problem? Please describe.**\r\n\r\nWhen a PVSystem has a single Array, you\
+        \ can't assign just the Array instance when constructing the PVSystem.\r\n\r\n```\r\nmount = pvlib.pvsystem.FixedMount(surface_tilt=35,\
+        \ surface_azimuth=180)\r\narray = pvlib.pvsystem.Array(mount=mount)\r\npv = pvlib.pvsystem.PVSystem(arrays=array)\r\
+        \n\r\n---------------------------------------------------------------------------\r\nTypeError                   \
+        \              Traceback (most recent call last)\r\n<ipython-input-13-f5424e3db16a> in <module>\r\n      3 mount =\
+        \ pvlib.pvsystem.FixedMount(surface_tilt=35, surface_azimuth=180)\r\n      4 array = pvlib.pvsystem.Array(mount=mount)\r\
+        \n----> 5 pv = pvlib.pvsystem.PVSystem(arrays=array)\r\n\r\n~\\anaconda3\\lib\\site-packages\\pvlib\\pvsystem.py in\
+        \ __init__(self, arrays, surface_tilt, surface_azimuth, albedo, surface_type, module, module_type, module_parameters,\
+        \ temperature_model_parameters, modules_per_string, strings_per_inverter, inverter, inverter_parameters, racking_model,\
+        \ losses_parameters, name)\r\n    251                 array_losses_parameters,\r\n    252             ),)\r\n--> 253\
+        \         elif len(arrays) == 0:\r\n    254             raise ValueError(\"PVSystem must have at least one Array.\
+        \ \"\r\n    255                              \"If you want to create a PVSystem instance \"\r\n\r\nTypeError: object\
+        \ of type 'Array' has no len()\r\n\r\n```\r\n\r\nNot a bug per se, since the PVSystem docstring requests that `arrays`\
+        \ be iterable. Still, a bit inconvenient to have to do this\r\n\r\n```\r\nmount = pvlib.pvsystem.FixedMount(surface_tilt=35,\
+        \ surface_azimuth=180)\r\narray = pvlib.pvsystem.Array(mount=mount)\r\npv = pvlib.pvsystem.PVSystem(arrays=[array])\r\
+        \n```\r\n\r\n**Describe the solution you'd like**\r\nHandle `arrays=array` where `array` is an instance of `Array`\r\
+        \n\r\n**Describe alternatives you've considered**\r\nStatus quo - either make the single Array into a list, or use\
+        \ the PVSystem kwargs.\r\n\n"

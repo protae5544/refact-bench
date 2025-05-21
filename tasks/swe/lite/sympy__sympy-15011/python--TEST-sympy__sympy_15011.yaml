@@ -1,0 +1,26 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-15011
+revision: b7c5ba2bf3ffd5cf453b25af7c8ddd9a639800cb
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-15011
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            lambdify does not work with certain MatrixSymbol\
+        \ names even with dummify=True\n`lambdify` is happy with curly braces in a symbol name and with `MatrixSymbol`s, but\
+        \ not with both at the same time, even if `dummify` is `True`.\r\n\r\nHere is some basic code that gives the error.\r\
+        \n```\r\nimport sympy as sy\r\ncurlyx = sy.symbols(\"{x}\")\r\nv = sy.MatrixSymbol(\"v\", 2, 1)\r\ncurlyv = sy.MatrixSymbol(\"\
+        {v}\", 2, 1)\r\n```\r\n\r\nThe following two lines of code work:\r\n```\r\ncurlyScalarId = sy.lambdify(curlyx, curlyx)\r\
+        \nvectorId = sy.lambdify(v,v)\r\n```\r\n\r\nThe following two lines of code give a `SyntaxError`:\r\n```\r\ncurlyVectorId\
+        \ = sy.lambdify(curlyv, curlyv)\r\ncurlyVectorIdDummified = sy.lambdify(curlyv, curlyv, dummify=True)\r\n```\r\n\r\
+        \n\n"

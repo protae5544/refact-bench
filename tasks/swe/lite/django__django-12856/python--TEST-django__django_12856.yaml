@@ -1,0 +1,23 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-12856
+revision: 8328811f048fed0dd22573224def8c65410c9f2e
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-12856
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Add check for fields of UniqueConstraints.\nDescription\n\
+        \t \n\t\t(last modified by Marnanel Thurman)\n\t \nWhen a model gains a UniqueConstraint, makemigrations doesn't check\
+        \ that the fields named therein actually exist.\nThis is in contrast to the older unique_together syntax, which raises\
+        \ models.E012 if the fields don't exist.\nIn the attached demonstration, you'll need to uncomment \"with_unique_together\"\
+        \ in settings.py in order to show that unique_together raises E012.\n"

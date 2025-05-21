@@ -1,0 +1,21 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-16503
+revision: a7e6f093c98a3c4783848a19fce646e32b6e0161
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-16503
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Bad centering for Sum pretty print\n```\r\n>>> pprint(Sum(x,\
+        \ (x, 1, oo)) + 3)\r\n  ∞\r\n ___\r\n ╲\r\n  ╲   x\r\n  ╱     + 3\r\n ╱\r\n ‾‾‾\r\nx = 1\r\n```\r\n\r\nThe `x` and\
+        \ the `+ 3` should be aligned. I'm not sure if the `x` should be lower of if the `+ 3` should be higher. \n"

@@ -1,0 +1,22 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-18087
+revision: 9da013ad0ddc3cd96fe505f2e47c63e372040916
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-18087
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Simplify of simple trig expression fails\ntrigsimp\
+        \ in various versions, including 1.5, incorrectly simplifies cos(x)+sqrt(sin(x)**2) as though it were cos(x)+sin(x)\
+        \ for general complex x. (Oddly it gets this right if x is real.)\r\n\r\nEmbarrassingly I found this by accident while\
+        \ writing sympy-based teaching material...\r\n\n"

@@ -1,0 +1,26 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-14024
+revision: b17abcb09cbcee80a90f6750e0f9b53f0247656c
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-14024
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Inconsistency when simplifying (-a)**x * a**(-x),\
+        \ a a positive integer\nCompare:\r\n\r\n```\r\n>>> a = Symbol('a', integer=True, positive=True)\r\n>>> e = (-a)**x\
+        \ * a**(-x)\r\n>>> f = simplify(e)\r\n>>> print(e)\r\na**(-x)*(-a)**x\r\n>>> print(f)\r\n(-1)**x\r\n>>> t = -S(10)/3\r\
+        \n>>> n1 = e.subs(x,t)\r\n>>> n2 = f.subs(x,t)\r\n>>> print(N(n1))\r\n-0.5 + 0.866025403784439*I\r\n>>> print(N(n2))\r\
+        \n-0.5 + 0.866025403784439*I\r\n```\r\n\r\nvs\r\n\r\n```\r\n>>> a = S(2)\r\n>>> e = (-a)**x * a**(-x)\r\n>>> f = simplify(e)\r\
+        \n>>> print(e)\r\n(-2)**x*2**(-x)\r\n>>> print(f)\r\n(-1)**x\r\n>>> t = -S(10)/3\r\n>>> n1 = e.subs(x,t)\r\n>>> n2\
+        \ = f.subs(x,t)\r\n>>> print(N(n1))\r\n0.5 - 0.866025403784439*I\r\n>>> print(N(n2))\r\n-0.5 + 0.866025403784439*I\r\
+        \n```\n"

@@ -1,0 +1,20 @@
+domain: swe-verified
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: scikit-learn__scikit-learn-14141
+revision: 3d997697fdd166eff428ea9fd35734b6a8ba113e
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - scikit-learn__scikit-learn-14141
+    - princeton-nlp/SWE-bench_Verified
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Add joblib in show_versions\njoblib should be added\
+        \ to the dependencies listed in show_versions or added to the issue template when sklearn version is > 0.20.\n"

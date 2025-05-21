@@ -1,0 +1,20 @@
+domain: swe-verified
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-16819
+revision: 0b0998dc151feb77068e2387c34cc50ef6b356ae
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-16819
+    - princeton-nlp/SWE-bench_Verified
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Reduce Add/RemoveIndex migration operations.\nDescription\n\
+        \t\nWe should reduce AddIndex/RemoveIndex operations when optimizing migration operations.\n"

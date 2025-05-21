@@ -1,0 +1,25 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sqlfluff__sqlfluff-1625
+revision: 14e1a23a3166b9a645a16de96f694c77a5d4abb7
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sqlfluff__sqlfluff-1625
+    - princeton-nlp/SWE-bench_Lite
+    - dev
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            TSQL - L031 incorrectly triggers \"Avoid using aliases\
+        \ in join condition\" when no join present\n## Expected Behaviour\r\n\r\nBoth of these queries should pass, the only\
+        \ difference is the addition of a table alias 'a':\r\n\r\n1/ no alias\r\n\r\n```\r\nSELECT [hello]\r\nFROM\r\n   \
+        \ mytable\r\n```\r\n\r\n2/ same query with alias\r\n\r\n```\r\nSELECT a.[hello]\r\nFROM\r\n    mytable AS a\r\n```\r\
+        \n\r\n## Observed Behaviour\r\n\r\n1/ passes\r\n2/ fails with: L031: Avoid using aliases in join condition.\r\n\r\n\
+        But there is no join condition :-)\r\n\r\n## Steps to Reproduce\r\n\r\nLint queries above\r\n\r\n## Dialect\r\n\r\n\
+        TSQL\r\n\r\n## Version\r\n\r\nsqlfluff 0.6.9\r\nPython 3.6.9\r\n\r\n## Configuration\r\n\r\nN/A\n"

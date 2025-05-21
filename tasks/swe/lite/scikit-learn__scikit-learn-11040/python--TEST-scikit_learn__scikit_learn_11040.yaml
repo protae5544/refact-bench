@@ -1,0 +1,26 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: scikit-learn__scikit-learn-11040
+revision: 96a02f3934952d486589dddd3f00b40d5a5ab5f2
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - scikit-learn__scikit-learn-11040
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Missing parameter validation in Neighbors estimator\
+        \ for float n_neighbors\n```python\r\nfrom sklearn.neighbors import NearestNeighbors\r\nfrom sklearn.datasets import\
+        \ make_blobs\r\nX, y = make_blobs()\r\nneighbors = NearestNeighbors(n_neighbors=3.)\r\nneighbors.fit(X)\r\nneighbors.kneighbors(X)\r\
+        \n```\r\n```\r\n~/checkout/scikit-learn/sklearn/neighbors/binary_tree.pxi in sklearn.neighbors.kd_tree.NeighborsHeap.__init__()\r\
+        \n\r\nTypeError: 'float' object cannot be interpreted as an integer\r\n```\r\nThis should be caught earlier and a\
+        \ more helpful error message should be raised (or we could be lenient and cast to integer, but I think a better error\
+        \ might be better).\r\n\r\nWe need to make sure that \r\n```python\r\nneighbors.kneighbors(X, n_neighbors=3.)\r\n\
+        ```\r\nalso works.\n"

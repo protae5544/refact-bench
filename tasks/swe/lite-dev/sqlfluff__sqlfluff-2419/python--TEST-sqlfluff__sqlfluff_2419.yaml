@@ -1,0 +1,24 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sqlfluff__sqlfluff-2419
+revision: f1dba0e1dd764ae72d67c3d5e1471cf14d3db030
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sqlfluff__sqlfluff-2419
+    - princeton-nlp/SWE-bench_Lite
+    - dev
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Rule L060 could give a specific error message\n\
+        At the moment rule L060 flags something like this:\r\n\r\n```\r\nL:  21 | P:   9 | L060 | Use 'COALESCE' instead of\
+        \ 'IFNULL' or 'NVL'.\r\n```\r\n\r\nSince we likely know the wrong word, it might be nice to actually flag that instead\
+        \ of both `IFNULL` and `NVL` - like most of the other rules do.\r\n\r\nThat is it should flag this:\r\n\r\n```\r\n\
+        L:  21 | P:   9 | L060 | Use 'COALESCE' instead of 'IFNULL'.\r\n```\r\n Or this:\r\n\r\n```\r\nL:  21 | P:   9 | L060\
+        \ | Use 'COALESCE' instead of 'NVL'.\r\n```\r\n\r\nAs appropriate.\r\n\r\nWhat do you think @jpy-git ?\r\n\n"

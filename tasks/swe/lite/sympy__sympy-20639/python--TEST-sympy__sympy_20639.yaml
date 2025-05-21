@@ -1,0 +1,24 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-20639
+revision: eb926a1d0c1158bf43f01eaf673dc84416b5ebb1
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-20639
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            inaccurate rendering of pi**(1/E)\nThis claims to\
+        \ be version 1.5.dev; I just merged from the project master, so I hope this is current.  I didn't notice this bug\
+        \ among others in printing.pretty.\r\n\r\n```\r\nIn [52]: pi**(1/E)                                              \
+        \                 \r\nOut[52]: \r\n-1___\r\n╲╱ π \r\n\r\n```\r\nLaTeX and str not fooled:\r\n```\r\nIn [53]: print(latex(pi**(1/E)))\
+        \                                                 \r\n\\pi^{e^{-1}}\r\n\r\nIn [54]: str(pi**(1/E))               \
+        \                                           \r\nOut[54]: 'pi**exp(-1)'\r\n```\r\n\n"

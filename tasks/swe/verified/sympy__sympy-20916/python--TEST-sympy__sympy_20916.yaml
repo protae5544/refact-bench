@@ -1,0 +1,21 @@
+domain: swe-verified
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-20916
+revision: 82298df6a51491bfaad0c6d1980e7e3ca808ae93
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-20916
+    - princeton-nlp/SWE-bench_Verified
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            pprint unicode does not format subscripts on Greek\
+        \ letters\nGood:\r\n\r\n[ -t₀⋅w₀   -t₁⋅w₀   -t₂⋅w₀]\r\n\r\n\r\nBad:\r\n\r\n[ -t₀⋅ω0   -t₁⋅ω0   -t₂⋅ω0]\r\n\r\n\r\n\
+        \n"

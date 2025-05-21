@@ -1,0 +1,25 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-11422
+revision: df46b329e0900e9e4dc1d60816c1dce6dfc1094e
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-11422
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Autoreloader with StatReloader doesn't track changes\
+        \ in manage.py.\nDescription\n\t \n\t\t(last modified by Mariusz Felisiak)\n\t \nThis is a bit convoluted, but here\
+        \ we go.\nEnvironment (OSX 10.11):\n$ python -V\nPython 3.6.2\n$ pip -V\npip 19.1.1\n$ pip install Django==2.2.1\n\
+        Steps to reproduce:\nRun a server python manage.py runserver\nEdit the manage.py file, e.g. add print(): \ndef main():\n\
+        \tprint('sth')\n\tos.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ticket_30479.settings')\n\t...\nUnder 2.1.8 (and\
+        \ prior), this will trigger the auto-reloading mechanism. Under 2.2.1, it won't. As far as I can tell from the django.utils.autoreload\
+        \ log lines, it never sees the manage.py itself.\n"

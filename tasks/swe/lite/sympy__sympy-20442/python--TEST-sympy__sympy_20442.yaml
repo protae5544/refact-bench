@@ -1,0 +1,26 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-20442
+revision: 1abbc0ac3e552cb184317194e5d5c5b9dd8fb640
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-20442
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            convert_to seems to combine orthogonal units\nTested\
+        \ in sympy 1.4, not presently in a position to install 1.5+.\r\nSimple example. Consider `J = kg*m**2/s**2 => J*s\
+        \ = kg*m**2/s`. The convert_to behavior is odd:\r\n```\r\n>>>convert_to(joule*second,joule)\r\n    joule**(7/9)\r\n\
+        ```\r\nI would expect the unchanged original expression back, an expression in terms of base units, or an error. It\
+        \ appears that convert_to can only readily handle conversions where the full unit expression is valid.\r\n\r\nNote\
+        \ that the following three related examples give sensible results:\r\n```\r\n>>>convert_to(joule*second,joule*second)\r\
+        \n    joule*second\r\n```\r\n```\r\n>>>convert_to(J*s, kg*m**2/s)\r\n    kg*m**2/s\r\n```\r\n```\r\n>>>convert_to(J*s,mins)\r\
+        \n    J*mins/60\r\n```\n"

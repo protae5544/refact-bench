@@ -1,0 +1,22 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-16820
+revision: c61219a7ae051d2baab53f041e00592011fc550c
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-16820
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Squashing migrations with Meta.index_together ->\
+        \ indexes transition should remove deprecation warnings.\nDescription\n\t\nSquashing migrations with Meta.index_together\
+        \ -> Meta.indexes transition should remove deprecation warnings. As far as I'm aware, it's a 4.2 release blocker because\
+        \ you cannot get rid of the index_together deprecation warnings without rewriting migrations, see comment.\n"

@@ -1,0 +1,21 @@
+domain: swe-verified
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-12713
+revision: 5b884d45ac5b76234eca614d90c83b347294c332
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-12713
+    - princeton-nlp/SWE-bench_Verified
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Allow overridding widget in formfield_for_manytomany().\n\
+        Description\n\t \n\t\t(last modified by Mariusz Felisiak)\n\t \nIt does not work when I set widget param to function\
+        \ formfield_for_manytomany().\nThis is different from the formfield_for_foreignkey() function.\n"

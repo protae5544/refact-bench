@@ -1,0 +1,22 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-15061
+revision: 2c01ebb4be5d53cbf6450f356c10e436025d6d07
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-15061
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Remove \"for = ...\" from MultiWidget's <label>.\n\
+        Description\n\t\nThe instance from Raw MultiWidget class generate id_for_label like f'{id_}0'\nIt has not sense.\n\
+        For example ChoiceWidget has self.add_id_index and I can decide it myself, how I will see label_id - with or without\
+        \ index.\nI think, it is better to remove completely id_for_label method from MultiWidget Class.\n"

@@ -1,0 +1,27 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-11620
+revision: 514efa3129792ec2abb2444f3e7aeb3f21a38386
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-11620
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            When DEBUG is True, raising Http404 in a path converter's\
+        \ to_python method does not result in a technical response\nDescription\n\t\nThis is the response I get (plain text):\
+        \ \nA server error occurred. Please contact the administrator.\nI understand a ValueError should be raised which tells\
+        \ the URL resolver \"this path does not match, try next one\" but Http404 is what came to my mind intuitively and\
+        \ the error message was not very helpful.\nOne could also make a point that raising a Http404 should be valid way\
+        \ to tell the resolver \"this is indeed the right path but the current parameter value does not match anything so\
+        \ stop what you are doing and let the handler return the 404 page (including a helpful error message when DEBUG is\
+        \ True instead of the default 'Django tried these URL patterns')\".\nThis would prove useful for example to implement\
+        \ a path converter that uses get_object_or_404.\n"

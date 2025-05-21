@@ -1,0 +1,35 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sphinx-doc__sphinx-10451
+revision: 195e911f1dab04b8ddeacbe04b7d214aaf81bb0b
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sphinx-doc__sphinx-10451
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Fix duplicated *args and **kwargs with autodoc_typehints\n\
+        Fix duplicated *args and **kwargs with autodoc_typehints\r\n\r\n### Bugfix\r\n- Bugfix\r\n\r\n### Detail\r\nConsider\
+        \ this\r\n```python\r\nclass _ClassWithDocumentedInitAndStarArgs:\r\n    \"\"\"Class docstring.\"\"\"\r\n\r\n    def\
+        \ __init__(self, x: int, *args: int, **kwargs: int) -> None:\r\n        \"\"\"Init docstring.\r\n\r\n        :param\
+        \ x: Some integer\r\n        :param *args: Some integer\r\n        :param **kwargs: Some integer\r\n        \"\"\"\
+        \r\n```\r\nwhen using the autodoc extension and the setting `autodoc_typehints = \"description\"`.\r\n\r\nWIth sphinx\
+        \ 4.2.0, the current output is\r\n```\r\nClass docstring.\r\n\r\n   Parameters:\r\n      * **x** (*int*) --\r\n\r\n\
+        \      * **args** (*int*) --\r\n\r\n      * **kwargs** (*int*) --\r\n\r\n   Return type:\r\n      None\r\n\r\n   __init__(x,\
+        \ *args, **kwargs)\r\n\r\n      Init docstring.\r\n\r\n      Parameters:\r\n         * **x** (*int*) -- Some integer\r\
+        \n\r\n         * ***args** --\r\n\r\n           Some integer\r\n\r\n         * ****kwargs** --\r\n\r\n           Some\
+        \ integer\r\n\r\n         * **args** (*int*) --\r\n\r\n         * **kwargs** (*int*) --\r\n\r\n      Return type:\r\
+        \n         None\r\n```\r\nwhere the *args and **kwargs are duplicated and incomplete.\r\n\r\nThe expected output is\r\
+        \n```\r\n  Class docstring.\r\n\r\n   Parameters:\r\n      * **x** (*int*) --\r\n\r\n      * ***args** (*int*) --\r\
+        \n\r\n      * ****kwargs** (*int*) --\r\n\r\n   Return type:\r\n      None\r\n\r\n   __init__(x, *args, **kwargs)\r\
+        \n\r\n      Init docstring.\r\n\r\n      Parameters:\r\n         * **x** (*int*) -- Some integer\r\n\r\n         *\
+        \ ***args** (*int*) --\r\n\r\n           Some integer\r\n\r\n         * ****kwargs** (*int*) --\r\n\r\n          \
+        \ Some integer\r\n\r\n      Return type:\r\n         None\r\n\r\n```\n"

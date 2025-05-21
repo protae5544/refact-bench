@@ -1,0 +1,28 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pytest-dev__pytest-6116
+revision: e670ff76cbad80108bde9bab616b66771b8653cf
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pytest-dev__pytest-6116
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            pytest --collect-only needs a one char shortcut\
+        \ command\nI find myself needing to run `--collect-only` very often and that cli argument is a very long to type one.\
+        \ \r\n\r\nI do think that it would be great to allocate a character for it, not sure which one yet. Please use up/down\
+        \ thumbs to vote if you would find it useful or not and eventually proposing which char should be used. \r\n\r\nClearly\
+        \ this is a change very easy to implement but first I want to see if others would find it useful or not.\npytest --collect-only\
+        \ needs a one char shortcut command\nI find myself needing to run `--collect-only` very often and that cli argument\
+        \ is a very long to type one. \r\n\r\nI do think that it would be great to allocate a character for it, not sure which\
+        \ one yet. Please use up/down thumbs to vote if you would find it useful or not and eventually proposing which char\
+        \ should be used. \r\n\r\nClearly this is a change very easy to implement but first I want to see if others would\
+        \ find it useful or not.\n"

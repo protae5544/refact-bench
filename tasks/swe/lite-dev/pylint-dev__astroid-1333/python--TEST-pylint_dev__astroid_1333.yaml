@@ -1,0 +1,32 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pylint-dev__astroid-1333
+revision: d2a5b3c7b1e203fec3c7ca73c30eb1785d3d4d0a
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pylint-dev__astroid-1333
+    - princeton-nlp/SWE-bench_Lite
+    - dev
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            astroid 2.9.1 breaks pylint with missing __init__.py:\
+        \ F0010: error while code parsing: Unable to load file __init__.py\n### Steps to reproduce\r\n> Steps provided are\
+        \ for Windows 11, but initial problem found in Ubuntu 20.04\r\n\r\n> Update 2022-01-04: Corrected repro steps and\
+        \ added more environment details\r\n\r\n1. Set up simple repo with following structure (all files can be empty):\r\
+        \n```\r\nroot_dir/\r\n|--src/\r\n|----project/ # Notice the missing __init__.py\r\n|------file.py # It can be empty,\
+        \ but I added `import os` at the top\r\n|----__init__.py\r\n```\r\n2. Open a command prompt\r\n3. `cd root_dir`\r\n\
+        4. `python -m venv venv`\r\n5. `venv/Scripts/activate`\r\n6. `pip install pylint astroid==2.9.1` # I also repro'd\
+        \ on the latest, 2.9.2\r\n7. `pylint src/project` # Updated from `pylint src`\r\n8. Observe failure:\r\n```\r\nsrc\\\
+        project\\__init__.py:1:0: F0010: error while code parsing: Unable to load file src\\project\\__init__.py:\r\n```\r\
+        \n\r\n### Current behavior\r\nFails with `src\\project\\__init__.py:1:0: F0010: error while code parsing: Unable to\
+        \ load file src\\project\\__init__.py:`\r\n\r\n### Expected behavior\r\nDoes not fail with error.\r\n> If you replace\
+        \ step 6 with `pip install pylint astroid==2.9.0`, you get no failure with an empty output - since no files have content\r\
+        \n\r\n### `python -c \"from astroid import __pkginfo__; print(__pkginfo__.version)\"` output\r\n2.9.1\r\n\r\n`python\
+        \ 3.9.1`\r\n`pylint 2.12.2 `\r\n\r\n\r\n\r\nThis issue has been observed with astroid `2.9.1` and `2.9.2`\n"

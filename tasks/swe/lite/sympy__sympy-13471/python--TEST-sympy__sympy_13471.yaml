@@ -1,0 +1,26 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-13471
+revision: 3546ac7ed78e1780c1a76929864bb33330055740
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-13471
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Python 2->3 pickle fails with float-containing expressions\n\
+        Dumping a pickled sympy expression containing a float in Python 2, then loading it in Python 3 generates an error.\r\
+        \n\r\nHere is a minimum working example, verified with sympy git commit 3546ac7 (master at time of writing), Python\
+        \ 2.7 and Python 3.6:\r\n\r\n```python\r\npython2 -c 'import pickle; import sympy; x = sympy.symbols(\"x\"); print\
+        \ pickle.dumps(x + 1.0, 2)' | python3 -c 'import pickle; import sys; print(pickle.loads(sys.stdin.buffer.read()))'\r\
+        \n```\r\n\r\nand the result:\r\n\r\n```\r\nTraceback (most recent call last):\r\n  File \"<string>\", line 1, in <module>\r\
+        \n  File \"/Users/alex/git/VU/sympy/sympy/core/numbers.py\", line 1045, in __new__\r\n    num[1] = long(num[1], 16)\r\
+        \nValueError: invalid literal for int() with base 16: '1L'\r\n```\n"

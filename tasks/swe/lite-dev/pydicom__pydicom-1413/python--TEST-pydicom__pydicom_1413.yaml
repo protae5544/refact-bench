@@ -1,0 +1,26 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pydicom__pydicom-1413
+revision: f909c76e31f759246cec3708dadd173c5d6e84b1
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pydicom__pydicom-1413
+    - princeton-nlp/SWE-bench_Lite
+    - dev
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Error : a bytes-like object is required, not 'MultiValue'\n\
+        Hello,\r\n\r\nI am getting following error while updating the tag LongTrianglePointIndexList (0066,0040),\r\n**TypeError:\
+        \ a bytes-like object is required, not 'MultiValue'**\r\n\r\nI noticed that the error  gets produced only when the\
+        \ VR is given as \"OL\" , works fine with \"OB\", \"OF\" etc.\r\n\r\nsample code (assume 'lineSeq' is the dicom dataset\
+        \ sequence):\r\n```python\r\nimport pydicom\r\nimport array\r\ndata=list(range(1,10))\r\ndata=array.array('H', indexData).tostring()\
+        \  # to convert to unsigned short\r\nlineSeq.add_new(0x00660040, 'OL', data)   \r\nds.save_as(\"mydicom\")\r\n```\r\
+        \noutcome: **TypeError: a bytes-like object is required, not 'MultiValue'**\r\n\r\nusing version - 2.0.0.0\r\n\r\n\
+        Any help is appreciated.\r\n\r\nThank you\n"

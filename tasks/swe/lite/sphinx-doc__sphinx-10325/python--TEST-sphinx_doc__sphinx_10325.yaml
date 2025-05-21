@@ -1,0 +1,29 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sphinx-doc__sphinx-10325
+revision: 7bdc11e87c7d86dcc2a087eccb7a7c129a473415
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sphinx-doc__sphinx-10325
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            inherited-members should support more than one class\n\
+        **Is your feature request related to a problem? Please describe.**\r\nI have two situations:\r\n- A class inherits\
+        \ from multiple other classes. I want to document members from some of the base classes but ignore some of the base\
+        \ classes\r\n- A module contains several class definitions that inherit from different classes that should all be\
+        \ ignored (e.g., classes that inherit from list or set or tuple). I want to ignore members from list, set, and tuple\
+        \ while documenting all other inherited members in classes in the module.\r\n\r\n**Describe the solution you'd like**\r\
+        \nThe :inherited-members: option to automodule should accept a list of classes. If any of these classes are encountered\
+        \ as base classes when instantiating autoclass documentation, they should be ignored.\r\n\r\n**Describe alternatives\
+        \ you've considered**\r\nThe alternative is to not use automodule, but instead manually enumerate several autoclass\
+        \ blocks for a module. This only addresses the second bullet in the problem description and not the first. It is also\
+        \ tedious for modules containing many class definitions.\r\n\r\n\n"

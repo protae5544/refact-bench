@@ -1,0 +1,22 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-15498
+revision: d90e34c61b27fba2527834806639eebbcfab9631
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-15498
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Fix handling empty string for If-Modified-Since\
+        \ header\nDescription\n\t\nEmpty string used to be ignored for If-Modified-Since header, but now raises exception\
+        \ since d6aff369ad3.\nFix handling empty string for If-Modified-Since header\nDescription\n\t\nEmpty string used to\
+        \ be ignored for If-Modified-Since header, but now raises exception since d6aff369ad3.\n"

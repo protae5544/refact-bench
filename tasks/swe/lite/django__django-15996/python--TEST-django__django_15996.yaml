@@ -1,0 +1,24 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-15996
+revision: b30c0081d4d8a31ab7dc7f72a4c7099af606ef29
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-15996
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Support for serialization of combination of Enum\
+        \ flags.\nDescription\n\t \n\t\t(last modified by Willem Van Onsem)\n\t \nIf we work with a field:\nregex_flags =\
+        \ models.IntegerField(default=re.UNICODE | re.IGNORECASE)\nThis is turned into a migration with:\ndefault=re.RegexFlag[None]\n\
+        This is due to the fact that the EnumSerializer aims to work with the .name of the item, but if there is no single\
+        \ item for the given value, then there is no such name.\nIn that case, we can use enum._decompose to obtain a list\
+        \ of names, and create an expression to create the enum value by \"ORing\" the items together.\n"

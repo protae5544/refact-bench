@@ -1,0 +1,27 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: pylint-dev__astroid-1978
+revision: 0c9ab0fe56703fa83c73e514a1020d398d23fa7f
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - pylint-dev__astroid-1978
+    - princeton-nlp/SWE-bench_Lite
+    - dev
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Deprecation warnings from numpy\n### Steps to reproduce\r\
+        \n\r\n1. Run pylint over the following test case:\r\n\r\n```\r\n\"\"\"Test case\"\"\"\r\n\r\nimport numpy as np\r\n\
+        value = np.random.seed(1234)\r\n```\r\n\r\n### Current behavior\r\n```\r\n/home/bje/source/nemo/myenv/lib/python3.10/site-packages/astroid/raw_building.py:470:\
+        \ FutureWarning: In the future `np.long` will be defined as the corresponding NumPy scalar.  (This may have returned\
+        \ Python scalars in past versions.\r\n  getattr(sys.modules[modname], name)\r\n/home/bje/source/nemo/myenv/lib/python3.10/site-packages/astroid/raw_building.py:470:\
+        \ FutureWarning: In the future `np.long` will be defined as the corresponding NumPy scalar.  (This may have returned\
+        \ Python scalars in past versions.\r\n  getattr(sys.modules[modname], name)\r\n```\r\n\r\n### Expected behavior\r\n\
+        There should be no future warnings.\r\n\r\n### python -c \"from astroid import __pkginfo__; print(__pkginfo__.version)\"\
+        \ output\r\n2.12.13\n"

@@ -1,0 +1,26 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: psf__requests-863
+revision: a0df2cbb10419037d11d04352b3175405ab52941
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - psf__requests-863
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Allow lists in the dict values of the hooks argument\n\
+        Currently the Request class has a .register_hook() method but it parses the dictionary it expects from it's hooks\
+        \ argument weirdly: the argument can only specify one hook function per hook.  If you pass in a list of hook functions\
+        \ per hook the code in Request.**init**() will wrap the list in a list which then fails when the hooks are consumed\
+        \ (since a list is not callable).  This is especially annoying since you can not use multiple hooks from a session.\
+        \  The only way to get multiple hooks now is to create the request object without sending it, then call .register_hook()\
+        \ multiple times and then finally call .send().\n\nThis would all be much easier if Request.**init**() parsed the\
+        \ hooks parameter in a way that it accepts lists as it's values.\n\n"

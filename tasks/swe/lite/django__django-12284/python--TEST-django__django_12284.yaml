@@ -1,0 +1,27 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: django__django-12284
+revision: c5e373d48cbdd923575956fed477b63d66d9603f
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - django__django-12284
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            Model.get_FOO_display() does not work correctly\
+        \ with inherited choices.\nDescription\n\t \n\t\t(last modified by Mariusz Felisiak)\n\t \nGiven a base model with\
+        \ choices A containing 3 tuples\nChild Model inherits the base model overrides the choices A and adds 2 more tuples\n\
+        get_foo_display does not work correctly for the new tuples added\nExample:\nclass A(models.Model):\n foo_choice =\
+        \ [(\"A\",\"output1\"),(\"B\",\"output2\")]\n field_foo = models.CharField(max_length=254,choices=foo_choice)\n class\
+        \ Meta:\n\t abstract = True\nclass B(A):\n foo_choice = [(\"A\",\"output1\"),(\"B\",\"output2\"),(\"C\",\"output3\"\
+        )]\n field_foo = models.CharField(max_length=254,choices=foo_choice)\nUpon invoking get_field_foo_display() on instance\
+        \ of B , \nFor value \"A\" and \"B\" the output works correctly i.e. returns \"output1\" / \"output2\"\nbut for value\
+        \ \"C\" the method returns \"C\" and not \"output3\" which is the expected behaviour\n"

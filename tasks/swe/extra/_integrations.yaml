@@ -1,0 +1,27 @@
+isolation:
+  container_workspace_folder: /testbed
+  docker_image_id: $DOCKER_IMAGE_ID
+  ports: ""
+  keep_containers_alive_for_x_minutes: "60"
+  available:
+    on_your_laptop: true
+    when_isolated: false
+  docker_extra_params:
+    - --userns=host
+    - -v
+    - /var/run/docker.sock:/var/run/docker.sock
+    - -e
+    - BASH_ENV="/root/.bashrc"
+  docker_entrypoint: "/bin/bash"
+
+shell:
+  timeout: "90"
+  available:
+    on_your_laptop: true
+    when_isolated: true
+  confirmation:
+    ask_user: [""]
+    deny: ["docker*"]
+
+globally_allowed_integrations:
+  - docker

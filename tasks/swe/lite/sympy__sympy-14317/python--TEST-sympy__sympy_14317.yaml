@@ -1,0 +1,25 @@
+domain: swe-lite
+topic: python
+train_or_test: TEST
+repo: ''
+task_name: sympy__sympy-14317
+revision: fb536869fb7aa28b2695ad7a3b70949926b291c4
+dockerfile: ./Dockerfile
+integrations_yaml: ../../extra/_integrations.yaml
+variables_yaml: ./_variables.yaml
+verification:
+    run_python: ../../extra/verification.py
+    run_python_params:
+    - sympy__sympy-14317
+    - princeton-nlp/SWE-bench_Lite
+    - test
+task:
+-   role: user
+    content: "\n            You are solving a Github issue in the repository .\n            You must make the changes to solve,\
+        \ close, or address the issue, directly in the code.\n            LaTeX printer does not use the same order of monomials\
+        \ as pretty and str \nWhen printing a Poly, the str and pretty printers use the logical order of monomials, from highest\
+        \ to lowest degrees. But latex printer does not. \r\n```\r\n>>> var('a b c x')\r\n>>> p = Poly([a, 1, b, 2, c, 3],\
+        \ x)\r\n>>> p\r\nPoly(a*x**5 + x**4 + b*x**3 + 2*x**2 + c*x + 3, x, domain='ZZ[a,b,c]')\r\n>>> pretty(p)\r\n\"Poly(a*x**5\
+        \ + x**4 + b*x**3 + 2*x**2 + c*x + 3, x, domain='ZZ[a,b,c]')\"\r\n>>> latex(p)\r\n'\\\\operatorname{Poly}{\\\\left(\
+        \ a x^{5} + b x^{3} + c x + x^{4} + 2 x^{2} + 3, x, domain=\\\\mathbb{Z}\\\\left[a, b, c\\\\right] \\\\right)}'\r\n\
+        ```\n"
