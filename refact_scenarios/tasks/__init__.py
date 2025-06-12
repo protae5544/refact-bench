@@ -12,9 +12,9 @@ def get_lsp_bin():
     """
     Get the path to the lsp binary.
     """
-    lsp_bin_candidates = [
-        Path(refact.__file__).parent.parent.parent / "target" / "release" / "refact-lsp",
+    lsp_bin_candidates = [  
         Path(refact.__file__).parent.parent.parent / "target" / "debug" / "refact-lsp",
+        Path(refact.__file__).parent.parent.parent / "target" / "release" / "refact-lsp",
         Path(refact.__file__).parent / "bin" / "refact-lsp",
         Path.home() / ".cache" / "refact" / "refact-lsp",
     ]
@@ -35,7 +35,6 @@ async def run_tasks(args):
         return 1
 
     workspace_dir = get_workspace_dir(args)
-
     lsp_bin = get_lsp_bin()
 
     # Log the last modified time of the lsp binaries
